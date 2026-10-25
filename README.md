@@ -1,1 +1,20 @@
-# CS370-Portfolio
+# CS 370 Pirate Intelligent Agent
+
+**Author:** Sadiksha Pathak
+**Course:** CS 370: Current/Emerging Trends in Computer Science, Southern New Hampshire University
+
+This repository contains my Project Two notebook, `Pathak_Sadiksha_ProjectTwo.ipynb`. In it, a pirate agent learns to find the treasure in an 8x8 maze using deep Q-learning.
+
+## About the Project
+
+**What code I was given.** The course provided the starter notebook and two Python files. `TreasureMaze.py` defines the environment: the maze, the pirate's moves, the rewards and penalties, and the win or lose status. `GameExperience.py` stores the pirate's past moves (experience replay) and builds the training targets for the neural network. The starter notebook also included the 8x8 maze, helper functions such as `play_game()` and `completion_check()`, the `build_model()` neural network (two hidden layers of 64 units with PReLU activation, Adam optimizer, mean squared error loss), and the `train_step()` function. I was told not to change the `.py` files, and I did not.
+
+**What code I created.** I completed the Q-training algorithm in `qtrain()`. Each training game starts the pirate on a random free cell. The pirate picks a move using an epsilon-greedy rule, which means it sometimes explores a random legal move and otherwise chooses the move with the highest predicted Q-value. Every move is stored in the replay memory with its reward, then a random batch of stored experiences is used to train the network. A separate target network is updated every 50 epochs to keep learning stable. The training loop stops when the win rate reaches 100% and the pirate can win from every free starting cell. I also chose the training settings (memory size, batch size, and target update frequency) and wrote the in-line comments. In my final run the pirate reached a 100% win rate at epoch 475, in about 397 seconds. I also wrote a design defense paper explaining how the agent works and why I chose this algorithm.
+
+## Reflection
+
+**What do computer scientists do and why does it matter?** Computer scientists turn real problems into systems that people can use and trust. In this course I saw that this goes beyond writing code. We choose a method, such as a neural network or reinforcement learning, test whether it really works, and explain the results. It matters because software now makes decisions that affect safety, money, privacy, and opportunities, so the people building it affect many lives.
+
+**How do I approach a problem as a computer scientist?** I start by defining the goal and what success looks like. In the pirate project, the goal was a pirate that can find the treasure from any starting cell, and the test for success was a 100% win rate confirmed by `completion_check()`. Then I break the problem into parts: the environment, the rewards, how the agent learns, and how to measure progress. I test small changes, compare results (different random seeds needed between about 430 and 900 epochs), and look for errors in the data or settings before blaming the algorithm. I also ask whether a simpler method would work, because a basic search could solve this small maze instantly, and deep Q-learning is more valuable for larger, changing problems.
+
+**What are my ethical responsibilities to the end user and the organization?** To the end user, I am responsible for protecting their data and being honest about what a system can and cannot do. In my GDPR white paper and my Module One access control proposal, I learned about data minimization, storage limits, transparency, and bias auditing, which means only collecting what is needed, not keeping it longer than necessary, explaining how decisions are made, and checking whether a system treats groups fairly. To the organization, I am responsible for building systems that follow the law, for testing them before release, and for speaking up when a design could cause harm. I also learned that keeping a human involved in important decisions is a good safeguard, because AI systems can be wrong or reflect the preferences of the people who trained them.
